@@ -1,9 +1,15 @@
 FROM node:18
-WORKDIR /usr/src/app
-COPY package*.json ./
-RUN npm i -g npm
+
+WORKDIR /app
+
+COPY . /app/
+
+COPY package*.json /app/
+
 RUN npm install
-COPY . .
-ENV PORT=8080
+
+RUN npm run build
+
 EXPOSE 8080
-CMD [ "node", "index.js" ]
+
+CMD ["npm", "start"]
